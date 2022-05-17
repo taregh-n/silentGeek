@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="crt crt-nav-on crt-nav-type1 crt-main-nav-on crt-sidebar-on crt-layers-3">
+
+{% load static %}
+{% load jformat %}
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>SilentGeek | سایلنت گیک</title>
+	<meta name="description" content="Silent Geek is a presional website">
+	<meta name="keywords" content="python, django, web development, programming, tkinter, tricke, biography">
+	<meta name="author" content="Taregh Naderi">
+
+	<link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+	<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+
+	<!-- Icon Fonts -->
+	<link href="{% static 'css/icomoon.css' %}" rel="stylesheet">
+
+	<!-- Styles -->
+	<link href="{% static 'css/plugins.css' %}" rel="stylesheet">
+	<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+	<!-- Theme Color -->
+	<meta name="theme-color" content="#c0e3e7">
+
+	<!-- Modernizer -->
+	<script type="text/javascript" src="{% static 'js/vendor/modernizr-3.3.1.min.js' %}"></script>
+</head>
+
+<body class="">
+	<div class="crt-wrapper">
+		<header id="crt-header">
+			<div class="crt-head-inner crt-container">
+				<div class="crt-container-sm">
+					<div class="crt-head-row">
+						<div id="crt-head-col1" class="crt-head-col text-left">
+							<form role="search" method="get" class="search-form" action="#">
+								<label>
+									<span class="screen-reader-text">جستجو برای:</span>
+									<input type="search" class="search-field" placeholder="جستجو" value="" name="s">
+								</label>
+								<button type="submit" class="search-submit">
+									<span class="screen-reader-text">جستجو</span>
+									<span class="crt-icon crt-icon-search"></span>
+								</button>
+							</form>
+						</div>
+
+						<div id="crt-head-col2" class="crt-head-col text-right">
+							<div class="crt-nav-container crt-container hidden-sm hidden-xs">
+								<nav id="crt-main-nav">
+
+									<ul class="clear-list">
+										<li><a href="{% url 'home:home' %}">خانه</a></li>
+										<li><a href="{% url 'blog:blog' %}">بلاگ</a></li>
+										<li><a href="{% url 'gallery:gallery' %}">گالری</a></li>
+										<!-- <li><a href="#">پروژه ها</a></li> -->
+										<li><a href="{% url 'chat:chat' %}">گپ و گفت</a></li>
+										<li><a href="{% url 'home:contact' %}">تماس</a></li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+
+						<div id="crt-head-col3" class="crt-head-col text-right">
+							<button id="crt-sidebar-btn" class="btn btn-icon btn-shade">
+								<span class="crt-icon crt-icon-side-bar-icon"></span>
+							</button>
+						</div>
+					</div>
+				</div><!-- .crt-head-inner -->
+			</div>
+
+			<nav id="crt-nav-sm" class="crt-nav hidden-lg hidden-md">
+				<ul class="clear-list">
+					<li>
+						<a href="{% url 'home:home' %}" data-tooltip="خانه">
+						<img class="avatar avatar-42" src="{% static 'images/uploads/avatar/avatar-42x42.png' %}" srcset="{% static 'images/uploads/avatar/avatar-84x84-2x.png' %}" alt="">
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'blog:blog' %}" data-tooltip="بلاگ"><span class="crt-icon crt-icon-about"></span></a>
+					</li>
+					<li>
+						<a href="{% url 'gallery:gallery' %}" data-tooltip="گالری"><span class="crt-icon crt-icon-portfolio"></span></a>
+					</li>
+					<!-- <li>
+						<a href="experience.html" data-tooltip="پروژه ها"><span class="crt-icon crt-icon-code"></span></a>
+					</li>
+					<li>
+						<a href="{% url 'chat:chat' %}" data-tooltip="محصولات"><span class="crt-icon crt-icon-cubes"></span></a>
+					</li> -->
+					<li>
+						<a href="{% url 'chat:chat' %}" data-tooltip="گپ و گفت"><span class="crt-icon crt-icon-references"></span></a>
+					</li>
+					<li>
+						<a href="{% url 'home:contact' %}" data-tooltip="تماس"><span class="crt-icon crt-icon-envelope-o"></span></a>
+					</li>
+				</ul>
+			</nav><!-- #crt-nav-sm -->
+		</header><!-- #crt-header -->
+
+		<div id="crt-container" class="crt-container">
+
+			<div id="crt-nav-wrap" class="hidden-sm hidden-xs">
+				<div id="crt-nav-inner">
+					<div class="crt-nav-cont">
+						<div id="crt-nav-scroll">
+							<nav id="crt-nav" class="crt-nav">
+								<ul class="clear-list">
+									<li>
+										<a href="{% url 'home:home' %}" data-tooltip="خانه"><img class="avatar avatar-42" src="{% static 'images/uploads/avatar/avatar-42x42.png' %}" srcset="{% static 'images/uploads/avatar/avatar-84x84-2x.png' %}" alt=""></a>
+									</li>
+									<li>
+										<a href="{% url 'blog:blog' %}" data-tooltip="بلاگ"><span class="crt-icon crt-icon-about"></span></a>
+									</li>
+									<li>
+										<a href="{% url 'gallery:gallery' %}" data-tooltip="گالری"><span class="crt-icon crt-icon-portfolio"></span></a>
+									</li>
+									<!-- <li>
+										<a href="experience.html" data-tooltip="پروژه ها"><span class="crt-icon crt-icon-code"></span></a>
+									</li> -->
+									<!-- <li>
+										<a href="{% url 'chat:chat' %}" data-tooltip="محصولات"><span class="crt-icon crt-icon-cubes"></span></a>
+									</li> -->
+									<li>
+										<a href="{% url 'chat:chat' %}" data-tooltip="گپ و گفت"><span class="crt-icon crt-icon-references"></span></a>
+									</li>
+									<li>
+										<a href="{% url 'home:contact' %}" data-tooltip="تماس"><span class="crt-icon crt-icon-envelope-o"></span></a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+
+						<div id="crt-nav-tools" class="hidden">
+							<span class="crt-icon crt-icon-dots-three-horizontal"></span>
+
+							<button id="crt-nav-arrow" class="clear-btn">
+								<span class="crt-icon crt-icon-chevron-thin-down"></span>
+							</button>
+						</div>
+					</div>
+					<div class="crt-nav-btm"></div>
+				</div>
+			</div><!-- .crt-nav-wrap -->
+
+			<div class="crt-container-sm">
+				<div class="crt-paper-layers">
+					<div class="crt-paper clearfix">
+						<div class="crt-paper-cont paper-padd clear-mrg">
+							
+							{% block page-header %}{% endblock %}
+							{% include 'messages.html' %}
+                            {% block content %}{% endblock %}
+
+						</div>
+						<!-- .crt-paper-cont -->
+					</div>
+					<!-- .crt-paper -->
+				</div>
+				<!-- .crt-paper-layers -->
+			</div>
+			<!-- .crt-container-sm -->
+		</div>
+		<!-- .crt-container -->
+
+
+		<div id="crt-sidebar">
+			<button id="crt-sidebar-close" class="btn btn-icon btn-light btn-shade">
+				<span class="crt-icon crt-icon-close"></span>
+			</button>
+
+			<div id="crt-sidebar-inner">
+				<nav id="crt-main-nav-sm" class="visible-xs visible-sm text-center">
+
+					<ul class="clear-list">
+						<li><a href="{% url 'home:home' %}">خانه</a></li>
+						<li><a href="{% url 'gallery:gallery' %}">نمونه‌کارها</a></li>
+						<li class="has-sub-menu"><a href="#">صفحات</a>
+							<ul class="sub-menu">
+								<li><a href="typography.html">تایپوگرافی</a></li>
+								<li><a href="components.html">اجزاء</a></li>
+								<li><a href="search.html">جستجو</a></li>
+								<li><a href="404.html">404</a></li>
+							</ul>
+						</li>
+						<li class="has-sub-menu"><a href="blog.html">بلاگ</a>
+							<ul class="sub-menu">
+								<li><a href="single.html">جزئیات مطلب</a></li>
+								<li><a href="single-image.html">جزئیات مطلب تصویری</a></li>
+								<li><a href="single-slider.html">جزئیات مطلب اسلایدر</a></li>
+								<li><a href="single-youtube.html">جزئیات مطلب یوتیوب</a></li>
+								<li><a href="single-vimeo.html">جزئیات مطلب Vimeo</a></li>
+								<li><a href="single-dailymotion.html">جزئیات مطلب Dailymotion</a></li>
+								<li><a href="single-soundcloud.html">جزئیات مطلب Soundcloud</a></li>
+								<li><a href="single-video.html">جزئیات مطلب ویدیویی</a></li>
+								<li><a href="single-audio.html">جزئیات مطلب صوتی</a></li>
+							</ul>
+						</li>
+						<li><a href="{% url 'home:contact' %}">تماس</a></li>
+					</ul>
+				</nav>
+
+				<aside class="widget-area">
+					
+				</aside>
+
+			</div><!-- #crt-sidebar-inner -->
+		</div><!-- #crt-sidebar -->
+
+		<footer id="crt-footer" class="crt-container-lg">
+			<div class="crt-container">
+				<div class="crt-container-sm clear-mrg text-center">
+					<p>ما را در شبکه های اجتماعی همراهی کنید</a></p>
+				</div>
+			</div>
+			<!-- .crt-container -->
+		</footer>
+		<!-- #crt-footer -->
+
+		<svg id="crt-bg-shape-1" class="hidden-sm hidden-xs" height="519" width="758">
+			<polygon class="pol" points="0,455,693,352,173,0,92,0,0,71"></polygon>
+		</svg>
+
+		<svg id="crt-bg-shape-2" class="hidden-sm hidden-xs" height="536" width="633">
+			<polygon points="0,0,633,0,633,536"></polygon>
+		</svg>
+	</div>
+	<!-- .crt-wrapper -->
+
+
+	<!-- Scripts -->
+	<script type="text/javascript" src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEn4c_T1rFt7ltf_oNavnjND8dDPm4KQs&language=fa"></script>
+
+	<script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+</body>
+
+</html>

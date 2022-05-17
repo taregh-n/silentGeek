@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page-header %}
+<header class="page-header">
+<h1 class="title-lg">گپ و گفت</h1>
+</header>
+{% endblock %}
+
+{% block content %}
+<h4 class="text-center">دیدگاه و نظرات خود را با هم در میان بگذاریم</h4>
+
+<div class="padd-box-sm">
+    {% if has_active %}
+    <span class="pf-ca-text">گپ های فعال</span>
+    <hr>
+    <ul class="accordion">
+        {% for chat in actives %}
+        <li>
+            <h3 class="accordion-header">{{ chat.topic }}</h3>
+            <div class="accordion-content text-justify">
+                <p>
+                {{ chat.describtion }}
+                </p>
+                {% if chat.active %}
+                <a class="toggle-link" href="#code-{{ chat.id }}">
+                    <p>
+                        <span class="crt-icon crt-icon-question-circle"></span>
+                         نظر شما چیه؟ | 
+                         <small>
+                             برای ارسال دیدگاه کلیک کنید
+                         </small>
+                    </p>
+                </a>
+                <div id="code-{{ chat.id }}" class="toggle-cont">
+                    <!-- Post Form: Logged Out -->
+                        <form action="{% url 'chat:send_reply' chat.id %}" method="post" class="contact-form">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label class="form-label" for="author">نام شما *</label>
+                                <div class="form-item-wrap">
+                                    <input id="author" class="form-item" name="name" type="text" required>
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label class="form-label" for="email">ایمیل شما</label>
+                                <div class="form-item-wrap">
+                                    <input id="email" class="form-item" name="email" type="email" dir="ltr">
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label class="form-label" for="message">پاسخ شما *</label>
+                                <div class="form-item-wrap">
+                                    <textarea id="message" class="form-item" name="comment" maxlength="500" required></textarea>
+                                    <small style="font-size: 0.7em; color: red;">محدودیت 500 کاراکتر</small>
+                                </div>
+                            </div>
+                
+                            <div class="form-submit form-item-wrap">
+                                <input class="btn btn-primary btn-lg" type="submit" value="ارسال پیام">
+                            </div>
+                        </form>
+                    <hr>
+                </div><!-- .toggle-cont -->
+                {% endif %}
+                <h5>
+                    پاسخ ها ({{ chat.chat_reply.count }} پاسخ):
+                </h5>
+                <hr>
+                {% for reply in chat.chat_reply.all %}
+                <div class="ref-box brd-btm hreview">
+                    <div class="ref-avatar">
+                        <img alt="" src="{% static 'images/uploads/avatar/avatar-58x58-default.png' %}" srcset="{% static 'images/uploads/avatar/avatar-108x108-01-2x.png' %} 2x" class="avatar avatar-54 photo" height="54" width="54">
+                    </div>
+            
+                    <div class="ref-info">
+                        <div class="ref-author">
+                            <strong>{{ reply.name }}</strong>
+                            {% if reply.user %}
+                            <span>ادمین</span>
+                            {% elif reply.site %}
+                            <span>از سایت: {{ reply.site }}</span>
+                            {% else %}
+                            <span>کاربر سایت</span>
+                            {% endif %}
+                        </div>
+            
+                        <blockquote class="ref-cont clear-mrg text  text-justify">
+                            <p>
+                                {{ reply.comment }}
+                            </p>
+                        </blockquote>
+                    </div>
+                </div><!-- .ref-box -->
+                {% endfor %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul><!-- .accordion -->
+    {% endif %}
+    {% if has_deactive %}
+    <span class="pf-ca-text">گپ های بسته شده</span>
+    <hr>
+    <ul class="accordion">
+        {% for chat in deactives %}
+        <li>
+            <h3 class="accordion-header">{{ chat.topic }}</h3>
+            <div class="accordion-content text-justify">
+                <p>
+                {{ chat.describtion }}
+                </p>
+                <h5>
+                    پاسخ ها ({{ chat.chat_reply.count }} پاسخ):
+                </h5>
+                <hr>
+                {% for reply in chat.chat_reply.all %}
+                <div class="ref-box brd-btm hreview">
+                    <div class="ref-avatar">
+                        <img alt="" src="{% static 'images/uploads/avatar/avatar-58x58-default.png' %}" srcset="{% static 'images/uploads/avatar/avatar-108x108-01-2x.png' %} 2x" class="avatar avatar-54 photo" height="54" width="54">
+                    </div>
+            
+                    <div class="ref-info">
+                        <div class="ref-author">
+                            <strong>{{ reply.name }}</strong>
+                            {% if reply.user %}
+                            <span>ادمین</span>
+                            {% elif reply.site %}
+                            <span>از سایت: {{ reply.site }}</span>
+                            {% else %}
+                            <span>کاربر سایت</span>
+                            {% endif %}
+                        </div>
+            
+                        <blockquote class="ref-cont clear-mrg text  text-justify">
+                            <p>
+                                {{ reply.comment }}
+                            </p>
+                        </blockquote>
+                    </div>
+                </div><!-- .ref-box -->
+                {% endfor %}
+            </div>
+
+        </li>
+        {% endfor %}
+    </ul><!-- .accordion -->
+    {% endif %}
+</div><!-- .padd-box-sm -->
+{% endblock %}

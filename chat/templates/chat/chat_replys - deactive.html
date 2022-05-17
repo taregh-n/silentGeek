@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block page-header %}
+<header class="page-header">
+<h1 class="title-lg">گپ و گفت</h1>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="padd-box-sm">
+    <h4>    {{ chat.topic }}    {% if not chat.active %}<small style="color: red;">(بسته شده)</small>{% endif %}</h4>
+    <p>
+        {{ chat.describtion }}
+    </p>
+    <h5>
+        پاسخ ها ({{ replys.count }} پاسخ):
+    </h5>
+    <hr>
+    {% for reply in replys %}
+    <div class="ref-box brd-btm hreview">
+        <div class="ref-avatar">
+            <img alt="" src="{% static 'images/uploads/avatar/avatar-58x58-default.png' %}" srcset="{% static 'images/uploads/avatar/avatar-108x108-01-2x.png' %} 2x" class="avatar avatar-54 photo" height="54" width="54">
+        </div>
+
+        <div class="ref-info">
+            <div class="ref-author">
+                <strong>{{ reply.name }}</strong>
+                {% if reply.user %}
+                <span>ادمین سایلنت گیگ</span>
+                {% elif reply.site %}
+                <span>از سایت: {{ reply.site }}</span>
+                {% else %}
+                <span>کاربر سایت</span>
+                {% endif %}
+            </div>
+
+            <blockquote class="ref-cont clear-mrg text  text-justify">
+                <p>
+                    {{ reply.comment }}
+                </p>
+            </blockquote>
+        </div>
+    </div><!-- .ref-box -->
+    {% endfor %}
+    {% if chat.active %}
+    <a class="toggle-link" href="#code-{{ chat.id }}">
+        <p>
+            <span class="crt-icon crt-icon-question-circle"></span>
+             نظر شما چیه؟ | 
+             <small>
+                 برای ارسال دیدگاه کلیک کنید
+             </small>
+        </p>
+    </a>
+    <div id="code-{{ chat.id }}" class="toggle-cont">
+        <!-- Post Form: Logged Out -->
+        <form action="{% url 'chat:send_reply' chat.id %}" method="post" id="commentform2" class="comment-form" novalidate=""> 
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="form-label" for="author">نام <span class="required">*</span></label>
+                <div class="form-item-wrap">
+                    <input class="form-item" id="author" name="name" type="text" value="" size="30" maxlength="245" aria-required="true" required="required">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="comment2">دیدگاه <span class="required">*</span></label>
+                <div class="form-item-wrap">
+                    <textarea class="form-item" id="comment2" name="comment" cols="50" rows="5" maxlength="65525" aria-required="true" required="required"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">ایمیل</label>
+                <div class="form-item-wrap">
+                    <input class="form-item" id="email" name="email" type="email" dir="ltr" value="" size="30" maxlength="100" aria-describedby="email-notes" aria-required="true" required="required">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="url">وب‌سایت</label>
+                <div class="form-item-wrap">
+                    <input class="form-item" id="url" name="site" type="url" dir="ltr" value="" size="30" maxlength="200">
+                </div>
+            </div>
+
+            <div class="form-submit form-item-wrap">
+                <input class="btn btn-primary btn-lg" name="submit" type="submit" value="ارسال دیدگاه">
+            </div>
+        </form>
+        <hr>
+    </div><!-- .toggle-cont -->
+    {% endif %}
+</div>
+{% endblock %}

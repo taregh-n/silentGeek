@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "silentgeek",
+            "database": "${workspaceFolder:Website}/db.sqlite3"
+        }
+    ]
+}

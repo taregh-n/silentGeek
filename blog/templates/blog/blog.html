@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jformat %}
+{% block page-header %}
+<header class="page-header padd-box">
+<h1 class="title-lg">بلاگ</h1>
+</header>
+{% endblock %}
+
+{% block content %}
+
+{% for post in page %}
+<article class="post hentry">
+    {% if post.image %}
+    <div class="post-media">
+        <a href="post/{{ post.id }}" rel="bookmark">
+            <figure class="post-figure" style="height: 300px; width: 100%; background-image: url({{ post.image.url }})"></figure>
+        </a>
+    </div>
+    {% endif %}
+    <div class="padd-box-sm">
+        <header class="post-header text-center">
+            <h2 class="post-title entry-title"><a rel="bookmark" href="post/{{ post.id }}">{{ post.title }}</a></h2>
+
+        </header>
+
+        <div class="post-content entry-content editor clearfix clear-mrg">
+            <p>
+                {{ post.description | safe }}
+            </p>
+        </div>
+
+        <footer class="post-footer">
+            <div class="post-footer-top clearfix">
+                <div class="post-footer-info">
+                    <span class="posted-on">
+                        <span class="screen-reader-text">ارسال در </span>
+                        <a href="#" rel="bookmark">
+                            <time class="post-date published" datetime="2016-07-04T11:33:08+00:00">{{ post.create.date | jformat:"%d %B %Y" }}</time>
+                            <!-- <time class="post-date updated" datetime="2016-12-08T14:45:55+00:00">8 اسفند 1398</time> -->
+                        </a>
+                    </span>
+                    <span class="post-author vcard"><span class="post-line">|</span> توسط  <a class="url fn n" href="#" rel="author">{{ post.author.get_full_name }}</a></span>
+                    <span class="post-line">|</span>
+                    <span class="post-cat-links">
+                        <span class="screen-reader-text">دسته ها</span>
+                        <a href="#" rel="category tag">{{ post.category}} </a>
+                    </span>
+                    <span class="post-line">|</span>
+                    <a href="" class="post-comments-count">{{ post.post_comment.count }} دیدگاه</a>
+                </div>
+
+                <div class="post-more">
+                    <a class="btn btn-sm btn-primary" href="post/{{ post.id }}" rel="bookmark">بیشتر بخوانید</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</article><!-- .post -->
+
+{% endfor %}
+
+<div class="pagination">
+    {% if page.has_previous %}
+    <a class="prev page-numbers" href="?page={{ page.previous_page_number }}"><i class="crt-icon crt-icon-chevron-right"></i></a>
+    {% endif %}
+    <div class="pages-continer">
+        {% for p in page_range %}
+       <a class="page-numbers {% if p == page.number %}current cursor-default{% endif %}" {% if p != page.number %} href="?page={{ p }}" {% endif %}>{{ p }}</a>
+        {% endfor %}
+    </div>
+    {% if page.has_next %}
+    <a class="next page-numbers" href="?page={{ page.next_page_number }}"><i class="crt-icon crt-icon-chevron-left"></i></a>
+    {% endif %}
+</div><!-- .pagination -->
+
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="padd-box-sm">
+    <div class="text-center">
+        <strong class="title-404 text-upper">404</strong>
+        <span class="info-404">صفحه ای که به دنبال آن هستید<br> موجود نیست</span>
+        <a class="btn btn-primary" href="{% url 'home:home' %}">بازگشت</a>
+    </div>
+</div>
+
+{% endblock %}

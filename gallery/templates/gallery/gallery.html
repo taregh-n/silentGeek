@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jformat %}
+{% block page-header %}
+<header class="page-header padd-box">
+<h1 class="title-lg text-upper padd-box">گالری</h1>
+</header>
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="pf-wrap">
+        <div class="pf-cat">
+            <span class="pf-ca-text">دسته ها: </span>
+            <div class="pf-filter padd-box">
+                <button data-filter="*">همه</button>
+                {% for cat in gallery_cats %}
+                <button data-filter=".{{ cat.slug }}">{{ cat.title }}</button>
+                {% endfor %}
+            </div><!-- .pf-filter -->
+        </div>
+
+        <div class="pf-grid">
+            <div class="pf-grid-sizer"></div><!-- used for sizing -->
+
+            {% for post in gallery_posts %}
+            <div class="pf-grid-item {{ post.category.slug }}">
+
+                <a class="pf-project" href="#pf-popup-{{ post.id }}">
+
+                    <figure class="pf-figure">
+                        {% with first_img=post.gallery_post_img.all|first %}
+                        <img src="{{ first_img.image.url }}" alt="">
+                        {% endwith %}
+                    </figure>
+
+                    <div class="pf-caption text-center">
+                        <div class="valign-table">
+                            <div class="valign-cell">
+
+                                <h2 class="pf-title">{{ post.title }}</h2>
+
+                                <div class="pf-text clear-mrg">
+                                    <p>{{ post.describtion|slice:90 }}...</p>
+                                </div>
+
+                                <button class="pf-btn btn btn-primary">مشاهده بیشتر</button>
+                            </div>
+                        </div>
+                    </div>
+                </a><!-- .pf-project -->
+
+                <div id="pf-popup-{{ post.id }}" class="pf-popup clearfix">
+                    <div class="pf-popup-col1">
+                        <div class="pf-popup-media cr-slider" data-init="none">
+                            {% for img in post.gallery_post_img.all %}
+                            <div class="pf-popup-embed">
+                                <img src="{{ img.image.url }}" alt="">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div><!-- .pf-popup-col1 -->
+
+                    <div class="pf-popup-col2">
+                        <div class="pf-popup-info">
+                            <h4 class="pf-popup-title">{{ post.title }}</h4>
+
+                            <div class="text-muted"><strong>{{ post.category.title }}</strong></div>
+
+                            <dl class="dl-horizontal">
+                                <dt>تاریخ:</dt>
+                                <dd>{{ post.create.date | jformat:"%A %d %B %Y" }}</dd>
+
+                                <dt>تعداد تصاویر:</dt>
+                                <dd>{{ post.gallery_post_img.all.count }}</dd>
+
+                                <dt>ایجاد کننده:</dt>
+                                <dd>{{ post.creator.get_full_name }}</dd>
+                            </dl>
+
+                            <p>
+                                {{ post.describtion }}
+                            </p>
+                        </div><!-- .pf-popup-info -->
+                    </div><!-- .pf-popup-col2 -->
+                </div><!-- .pf-popup -->
+            </div><!-- .pf-grid-item -->
+            {% endfor %}
+        </div><!-- .pf-grid -->
+    </div><!-- .pf-wrap -->
+</section><!-- .section -->
+
+{% endblock %}
