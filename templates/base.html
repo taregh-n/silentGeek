@@ -38,10 +38,10 @@
 				<div class="crt-container-sm">
 					<div class="crt-head-row">
 						<div id="crt-head-col1" class="crt-head-col text-left">
-							<form role="search" method="get" class="search-form" action="#">
+							<form role="search" method="get" class="search-form" action="{% url 'home:search' %}">
 								<label>
 									<span class="screen-reader-text">جستجو برای:</span>
-									<input type="search" class="search-field" placeholder="جستجو" value="" name="s">
+									<input type="search" class="search-field" placeholder="جستجو" value="" name="search">
 								</label>
 								<button type="submit" class="search-submit">
 									<span class="screen-reader-text">جستجو</span>
@@ -180,28 +180,9 @@
 
 					<ul class="clear-list">
 						<li><a href="{% url 'home:home' %}">خانه</a></li>
-						<li><a href="{% url 'gallery:gallery' %}">نمونه‌کارها</a></li>
-						<li class="has-sub-menu"><a href="#">صفحات</a>
-							<ul class="sub-menu">
-								<li><a href="typography.html">تایپوگرافی</a></li>
-								<li><a href="components.html">اجزاء</a></li>
-								<li><a href="search.html">جستجو</a></li>
-								<li><a href="404.html">404</a></li>
-							</ul>
-						</li>
-						<li class="has-sub-menu"><a href="blog.html">بلاگ</a>
-							<ul class="sub-menu">
-								<li><a href="single.html">جزئیات مطلب</a></li>
-								<li><a href="single-image.html">جزئیات مطلب تصویری</a></li>
-								<li><a href="single-slider.html">جزئیات مطلب اسلایدر</a></li>
-								<li><a href="single-youtube.html">جزئیات مطلب یوتیوب</a></li>
-								<li><a href="single-vimeo.html">جزئیات مطلب Vimeo</a></li>
-								<li><a href="single-dailymotion.html">جزئیات مطلب Dailymotion</a></li>
-								<li><a href="single-soundcloud.html">جزئیات مطلب Soundcloud</a></li>
-								<li><a href="single-video.html">جزئیات مطلب ویدیویی</a></li>
-								<li><a href="single-audio.html">جزئیات مطلب صوتی</a></li>
-							</ul>
-						</li>
+						<li><a href="{% url 'blog:blog' %}">بلاگ</a></li>
+						<li><a href="{% url 'gallery:gallery' %}">گالری</a></li>
+						<li><a href="{% url 'chat:chat' %}">گپ و گفت</a></li>
 						<li><a href="{% url 'home:contact' %}">تماس</a></li>
 					</ul>
 				</nav>
@@ -216,7 +197,7 @@
 		<footer id="crt-footer" class="crt-container-lg">
 			<div class="crt-container">
 				<div class="crt-container-sm clear-mrg text-center">
-					<p>ما را در شبکه های اجتماعی همراهی کنید</a></p>
+					<p>ما را در شبکه های اجتماعی همراهی کنید</p>
 				</div>
 			</div>
 			<!-- .crt-container -->

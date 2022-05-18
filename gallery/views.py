@@ -4,7 +4,7 @@ from .models import GalleryCategory, GalleryPost
 
 
 def gallery(request):
-    gallery_posts = GalleryPost.objects.filter(active=True)
+    gallery_posts = GalleryPost.objects.filter(active=True).reverse()
     gallery_cats = GalleryCategory.objects.all()
 
     params = {

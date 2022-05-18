@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+live_deploy = False
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,8 +26,13 @@ SECRET_KEY = 'django-insecure-wxm!x700688w(r!9uzk8ga(fi$mr@)j5r$5=7$m_q(91%a+=#i
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
+
+if live_deploy:
+    DEBUG = False
+    ALLOWED_HOSTS = ['http://silentgeek.ir', 'silentgeek.ir', 'https://silentgeek.ir', 'www.silentgeek.ir']
+
+
 
 
 # Application definition
@@ -119,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'asia/Tehran'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 

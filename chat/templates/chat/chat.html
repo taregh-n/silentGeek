@@ -8,7 +8,12 @@
 {% endblock %}
 
 {% block content %}
+
+{% if has_active or has_deactive %}
 <h4 class="text-center">دیدگاه و نظرات خود را با هم در میان بگذاریم</h4>
+{% else %}
+<h4 class="text-center">هیچ گپ و گفتی موجود نیست!</h4>
+{% endif  %}
 
 <div class="padd-box-sm">
     {% if has_active %}

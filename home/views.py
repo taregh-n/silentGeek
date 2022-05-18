@@ -7,13 +7,13 @@ from gallery.models import GalleryPost
 
 # Create your views here.
 def home(request):
-    last_posts = Post.objects.all()[:9]
-    last_chats = Chat.objects.all()[:9]
-    last_gposts = GalleryPost.objects.all()[:9]
+    new_posts = Post.objects.filter(active = True).reverse()[:9]
+    new_chats = Chat.objects.filter(active = True, hidden=True).reverse()[:9]
+    new_gposts = GalleryPost.objects.filter(active = True).reverse()[:9]
     params = {
-        'last_posts': last_posts,
-        'last_chats': last_chats,
-        'last_gposts': last_gposts,
+        'new_posts': new_posts,
+        'new_chats': new_chats,
+        'new_gposts': new_gposts,
 
     }
     return render(request, 'home/home.html', params)
@@ -45,6 +45,22 @@ def contact(request):
         'contact_form': contact_form,
     }
     return render(request, 'home/contact.html', params)
+
+
+def search(request):
+    if 'search' in request.GET:
+        kw = request.GET.get('search')
+        search_posts = Post.objects.filter(title__icontains = kw, active = True).reverse()
+        search_chats = Chat.objects.filter(topic__icontains = kw, hidden = False).reverse()
+        search_gposts = GalleryPost.objects.filter(title__icontains = kw, active = True).reverse()
+        params = {
+            'search_posts': search_posts,
+            'search_chats': search_chats,
+            'search_gposts': search_gposts,
+        }
+        return render(request, 'home/search.html', params)
+
+    return render(request, 'home/search.html')
 
 
 def error_404_page(request, exeption):

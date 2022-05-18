@@ -6,21 +6,21 @@ from django.contrib import messages
 
 
 def has_active():
-    actives = Chat.objects.filter(active = True)
+    actives = Chat.objects.filter(active = True, hidden = False)
     if actives:
         return True
     return False
 
 def has_deactive():
-    deactives = Chat.objects.filter(active = False)
+    deactives = Chat.objects.filter(active = False, hidden = False)
     if deactives:
         return True
     return False
 
 def chat(request):
     reply_form = ReplyForm()
-    active_chats = Chat.objects.filter(active = True)
-    deactive_chats = Chat.objects.filter(active = False)
+    active_chats = Chat.objects.filter(active = True, hidden=False).reverse()
+    deactive_chats = Chat.objects.filter(active = False, hidden=False).reverse()
     params = {
         'actives': active_chats,
         'deactives': deactive_chats,
@@ -50,12 +50,3 @@ def send_reply(request, chat_id):
         else:
             messages.warning(request, 'خطایی در ثبت پاسخ شما رخ داده است', 'danger')
     return redirect(ref_url)
-
-# def replys(request, chat_id):
-#     chat = get_object_or_404(Chat, id=chat_id)
-#     replys = ChatReply.objects.filter(chat_id= chat_id)
-#     params= {
-#         'chat': chat,
-#         'replys': replys,
-#     }
-#     return render(request, 'chat/chat_replys.html', params)

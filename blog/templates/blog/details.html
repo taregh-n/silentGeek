@@ -43,7 +43,7 @@
                         <a href="#" rel="category tag">{{ post.category }}</a>
                     </span>
                     <span class="post-line">|</span>
-                    <a href="" class="post-comments-count">{{ post.post_comment.count }} دیدگاه</a>
+                    <a href="" class="post-comments-count">{{ post_comments.count }} دیدگاه</a>
                 </div>
             </div>
 
@@ -153,7 +153,7 @@
 
 
         <ol class="comment-list clear-list">
-            {% for comment in post.post_comment.all %}
+            {% for comment in post_comments %}
             <li class="comment bypostauthor">
                 <article class="comment-body">
                     <header class="comment-header">

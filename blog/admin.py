@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
-class CommentInline(admin.StackedInline):
+class CommentInline(admin.TabularInline):
     readonly_fields = ('user', 'name', 'post', 'site', 'email', 'content', 'parent')
     exclude = ('image',)
     show_change_link = True

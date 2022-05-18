@@ -11,6 +11,7 @@ class Chat(models.Model):
     active = models.BooleanField(default=True)
     create = jmodels.jDateTimeField(auto_now_add=True)
     update = jmodels.jDateTimeField(auto_now=True)
+    hidden = models.BooleanField(default=False)
 
     def __str__(self):
         return self.topic

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load jformat %}
+{% load my_filters %}
+
 {% block page-header %}
 <header class="page-header padd-box">
 <h1 class="title-lg">بلاگ</h1>
@@ -35,19 +37,20 @@
                 <div class="post-footer-info">
                     <span class="posted-on">
                         <span class="screen-reader-text">ارسال در </span>
-                        <a href="#" rel="bookmark">
-                            <time class="post-date published" datetime="2016-07-04T11:33:08+00:00">{{ post.create.date | jformat:"%d %B %Y" }}</time>
-                            <!-- <time class="post-date updated" datetime="2016-12-08T14:45:55+00:00">8 اسفند 1398</time> -->
-                        </a>
+                        <time class="post-date published" datetime="2016-07-04T11:33:08+00:00">{{ post.create.date | jformat:"%d %B %Y" }}</time>
+                        <!-- <time class="post-date updated" datetime="2016-12-08T14:45:55+00:00">8 اسفند 1398</time> -->
                     </span>
-                    <span class="post-author vcard"><span class="post-line">|</span> توسط  <a class="url fn n" href="#" rel="author">{{ post.author.get_full_name }}</a></span>
+                    <span class="post-author vcard"><span class="post-line">|</span> توسط {{ post.author.get_full_name }}</span>
                     <span class="post-line">|</span>
                     <span class="post-cat-links">
                         <span class="screen-reader-text">دسته ها</span>
-                        <a href="#" rel="category tag">{{ post.category}} </a>
+                        <form action="{% url 'blog:blog' %}" id="category-form-{{ post.id }}">
+                            <input type="hidden" name="category" value="{{ post.category }}">
+                            <a href="" rel="category tag" onclick='document.forms["category-form-{{ post.id }}"].submit(); return false;'>{{ post.category}} </a>
+                        </form>
                     </span>
                     <span class="post-line">|</span>
-                    <a href="" class="post-comments-count">{{ post.post_comment.count }} دیدگاه</a>
+                    <span class="post-comments-count">{{ post.post_comment.count }} دیدگاه</span>
                 </div>
 
                 <div class="post-more">
