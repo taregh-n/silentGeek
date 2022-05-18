@@ -8,7 +8,7 @@ from gallery.models import GalleryPost
 # Create your views here.
 def home(request):
     new_posts = Post.objects.filter(active = True).reverse()[:9]
-    new_chats = Chat.objects.filter(active = True, hidden=True).reverse()[:9]
+    new_chats = Chat.objects.filter(hidden=False).reverse()[:9]
     new_gposts = GalleryPost.objects.filter(active = True).reverse()[:9]
     params = {
         'new_posts': new_posts,
