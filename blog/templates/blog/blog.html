@@ -45,7 +45,7 @@
                     <span class="post-cat-links">
                         <span class="screen-reader-text">دسته ها</span>
                         <form action="{% url 'blog:blog' %}" id="category-form-{{ post.id }}">
-                            <input type="hidden" name="category" value="{{ post.category }}">
+                            <input type="hidden" name="category" value="{{ post.category.slug }}">
                             <a href="" rel="category tag" onclick='document.forms["category-form-{{ post.id }}"].submit(); return false;'>{{ post.category}} </a>
                         </form>
                     </span>

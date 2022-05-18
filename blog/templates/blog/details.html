@@ -40,7 +40,10 @@
                 <div class="post-footer-info">
                     <span class="post-cat-links">
                         <span class="">دسته بندی: </span>
-                        <a href="#" rel="category tag">{{ post.category }}</a>
+                        <form action="{% url 'blog:blog' %}" id="category-form-{{ post.id }}" style="display: inline;">
+                            <input type="hidden" name="category" value="{{ post.category.slug }}">
+                            <a href="" rel="category tag" onclick='document.forms["category-form-{{ post.id }}"].submit(); return false;'>{{ post.category}} </a>
+                        </form>
                     </span>
                     <span class="post-line">|</span>
                     <a href="" class="post-comments-count">{{ post_comments.count }} دیدگاه</a>

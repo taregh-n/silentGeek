@@ -8,7 +8,7 @@ def blog(request):
     all_posts = Post.objects.filter(active=True).reverse()
     if 'category' in request.GET:
         category = request.GET.get('category')
-        all_posts = Post.objects.filter(category__title=category, active = True).reverse()
+        all_posts = Post.objects.filter(category__slug=category, active = True).reverse()
     paginator = Paginator(all_posts, 7)
     page_num = request.GET.get('page')
     page_posts = paginator.get_page(page_num)
